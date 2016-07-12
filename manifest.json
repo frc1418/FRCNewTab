@@ -1,0 +1,15 @@
+{
+	"manifest_version": 2,
+	"name": "FRC New Tab",
+    "short_name": "FRCNewTab",
+	"description": "New Tab page to display information about a random FRC team.",
+	"icons": {
+		"128": "128.png"
+	},
+	"version": "1.3.2",
+	"permissions": [],
+	"chrome_url_overrides": {
+		"newtab": "newtab.html"
+	},
+	"options_page": "options.html"
+}
