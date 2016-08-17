@@ -28,7 +28,7 @@ req.onreadystatechange = function() {
 // Make a new request to get list of team media from TBA
 var mediaReq = new XMLHttpRequest();
 // Get data
-mediaReq.open('GET', 'http://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
+mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
 // This is required for some reason
 mediaReq.send();
 // When the data is ready
