@@ -1,6 +1,8 @@
 # FRCNewTab
 Display information about a random FRC team in your new tab.
 
+![Screenshot](screenshot.png)
+
 ## Installation
 To install from source:  
 1. Clone or download files.  
