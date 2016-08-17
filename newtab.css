@@ -38,6 +38,12 @@ body {
     background: rgba(0,0,0,.8);
     text-align: center;
 }
+a,a:hover{
+color:white;
+text-decoration: none;
+}
+
+
 h1 {
     font-size: 150px;
     font-weight: 100;
