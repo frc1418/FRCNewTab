@@ -2,7 +2,8 @@
 var el = {
 	number: document.getElementById('number'),
 	name: document.getElementById('name'),
-	bg: document.getElementById('background')
+	bg: document.getElementById('background'),
+	rookie: document.getElementById('rookie')
 };
 
 // Pick rand team from team array in data.js
@@ -20,8 +21,9 @@ req.onreadystatechange = function() {
 		// Parse the data into JSON to get it ready to be used
 		team = JSON.parse(req.responseText);
 		// Set team number and name on page
-		el.number.innerHTML = teamNum;
+		el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNum + '</a>';
 		el.name.innerHTML = team.nickname;
+		el.rookie.innerHTML = team.rookie_year;
 	}
 };
 
