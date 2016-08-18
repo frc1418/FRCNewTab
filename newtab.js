@@ -3,7 +3,7 @@ var el = {
 	number: document.getElementById('number'),
 	name: document.getElementById('name'),
 	bg: document.getElementById('background'),
-	rookie: document.getElementById('rookie')
+	location: document.getElementById('location')
 };
 
 // Pick rand team from team array in data.js
@@ -25,6 +25,7 @@ try {
 			team = JSON.parse(req.responseText);
 			// Set team name on page
 			el.name.innerHTML = (team.website && team.website !== 'Coming Soon') ? '<a href="' + team.website + '">' + team.nickname + '</a>' : team.nickname;
+			el.location.innerHTML = team.location
 		}
 	};
 } catch (e) {}
