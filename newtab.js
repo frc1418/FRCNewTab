@@ -33,16 +33,16 @@ try {
 var src = 'bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
 // Make a new request to get list of team media from TBA
 var mediaReq = new XMLHttpRequest();
-// Get data
-mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
-// This is required for some reason
-mediaReq.send();
 
 mediaReq.onreadystatechange = function() {
-	try {
-		if (req.readyState == 4 && req.status == 200) {
-			// Parse data for processing
-			var media = JSON.parse(mediaReq.responseText);
+	if (mediaReq.readyState == 4 && mediaReq.status == 200) {
+		// Parse data for processing
+		var media = [];
+		try {
+			media = JSON.parse(mediaReq.responseText);
+		} catch (e) {}
+        console.log(media.length);
+		if (media.length > 0) {
 			var target;
 			// Go through every piece of media
 			for (i = 0; i < media.length; i++) {
@@ -54,7 +54,8 @@ mediaReq.onreadystatechange = function() {
 				}
 			}
 			// Check where the media is sourced from. Use this to build a link to the image.
-			if (media.length > 0) {
+			if (target !== null) {
+                console.log('targeted ', media[target].type);
 				switch (media[target].type) {
 					case 'imgur':
 						src = 'http://i.imgur.com/' + media[target].foreign_key + '.png';
@@ -65,25 +66,34 @@ mediaReq.onreadystatechange = function() {
 				}
 			}
 		}
-	} catch (e) {
-
-	}
-};
-// Create image. This will be used to check if the image is smaller than the window.
-var img = new Image();
-// Give it the proper source.
-img.src = src;
-// When the source is done loading,
-img.onload = function() {
-	// Check if the image is smaller than the window.
-	if (img.naturalWidth >= window.innerWidth) {
-		// If it is, blur the background image.
-		el.bg.style['-webkit-filter'] = 'none';
+        console.log(media);
+        console.log(src);
+        renderImage();
 	}
 };
 
-// Set the src of the real background image.
-el.bg.style.backgroundImage = 'url(' + src + ')';
+// Get data
+mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
+// This is required for some reason
+mediaReq.send();
+
+function renderImage() {
+    // Create image. This will be used to check if the image is smaller than the window.
+    var img = new Image();
+    // Give it the proper source.
+    img.src = src;
+    // When the source is done loading,
+    img.onload = function() {
+    	// Check if the image is smaller than the window.
+    	if (img.naturalWidth >= window.innerWidth) {
+    		// If it is, blur the background image.
+    		el.bg.style['-webkit-filter'] = 'none';
+    	}
+    };
+
+    // Set the src of the real background image.
+    el.bg.style.backgroundImage = 'url(' + src + ')';
+}
 
 // TODO: This process could probably be way more efficient. Find a way to improve.
 // TODO: Get rid of all the errors that come from this.
