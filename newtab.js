@@ -13,6 +13,7 @@ var isMilitary = true; // testing
 // Pick rand team from team array in data.js
 if (!isClockMode) {
     var teamNum = teams[parseInt(Math.random() * teams.length)];
+    var teamNumText = teamNum.toString();
 } else {
     // Get date
     var d = new Date();
@@ -24,9 +25,18 @@ if (!isClockMode) {
     hours *= 100;
     timeTeam = hours + d.getMinutes();
     var teamNum = timeTeam;
+
+    // Create text version
+    var teamNumText = teamNum.toString();
+
+    // Insert colon
+    var length = teamNumText.length;
+    var teamNumArray = teamNumText.split("");
+    teamNumArray.splice((length - 2), 0, ":");
+    teamNumText = teamNumArray.join("");
 }
 // Put team number on page
-el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNum + '</a>';
+el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNumText + '</a>';
 
 try {
 	// Create request to get data from TBA
