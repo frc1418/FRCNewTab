@@ -20,7 +20,7 @@
 html,
 body {
     height: 100%;
-    background: rgba(0,0,0,.7);
+    background: rgba(0, 0, 0, .5);
 }
 body {
     font-family: 'Roboto', sans-serif;
@@ -35,15 +35,14 @@ body {
 }
 #content {
     padding: 30px;
-    background: rgba(0,0,0,.8);
+    background: rgba(0, 0, 0, .8);
     text-align: center;
 }
-a,a:hover{
-color:white;
-text-decoration: none;
+a,
+a:hover {
+    color: white;
+    text-decoration: none;
 }
-
-
 h1 {
     font-size: 150px;
     font-weight: 100;
@@ -52,25 +51,14 @@ h2 {
     font-size: 50px;
     font-weight: 300
 }
-/* THE IMAGES SHOULD BE DISPLAYED AS IF THEY ARE BACKGROUND WITH background-size: cover.
-    Currently, they're only doing that if they're smaller than the screen.
-    TODO: Fix this. */
-.background {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  z-index: -1;
-}
 #background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  min-width: 50%;
-  min-height: 50%;
-  overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    -webkit-filter: blur(10px);
 }
