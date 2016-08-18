@@ -22,8 +22,7 @@ req.onreadystatechange = function() {
 		team = JSON.parse(req.responseText);
 		// Set team number and name on page
 		el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNum + '</a>';
-		el.name.innerHTML = team.nickname;
-		el.rookie.innerHTML = team.rookie_year;
+		el.name.innerHTML = team.website ? '<a href="' + team.website + '">' + team.nickname + '</a>' : team.nickname;
 	}
 };
 
@@ -67,7 +66,7 @@ mediaReq.onreadystatechange = function() {
 		img.onload = function() {
             // Check if the image is smaller than the window.
 			if (img.naturalWidth < window.innerWidth) {
-                // If it is, blur the bacground image.
+                // If it is, blur the background image.
 				el.bg.style['-webkit-filter'] = 'blur(10px)';
 			}
 		};
