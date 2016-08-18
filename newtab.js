@@ -6,8 +6,25 @@ var el = {
 	location: document.getElementById('location')
 };
 
+// TODO get these values from the settings page
+var isClockMode = true; // testing clock mode
+var isMilitary = true; // testing
+
 // Pick rand team from team array in data.js
-var teamNum = teams[parseInt(Math.random() * teams.length)];
+if (!isClockMode) {
+    var teamNum = teams[parseInt(Math.random() * teams.length)];
+} else {
+    // Get date
+    var d = new Date();
+    var hours = d.getHours();
+    if (!isMilitary) {
+        hours %= 12;
+    }
+    // Construct team number
+    hours *= 100;
+    timeTeam = hours + d.getMinutes();
+    var teamNum = timeTeam;
+}
 // Put team number on page
 el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNum + '</a>';
 
