@@ -72,8 +72,14 @@ function getTBAData() {
             if (req.readyState == 4 && req.status == 200) {
                 // Parse the data into JSON to get it ready to be used
                 team = JSON.parse(req.responseText);
+
                 // Set team name on page
-                el.name.innerHTML = (team.website && team.website !== 'Coming Soon') ? '<a href="' + team.website + '">' + team.nickname + '</a>' : team.nickname;
+                if (team.website && team.website !== 'Coming Soon') {
+                    el.name.innerHTML = '<a href="' + team.website + '">' + team.nickname + '</a>';
+                } else {
+                    el.name.innerHTML = team.nickname;
+                }
+
                 el.location.innerHTML = team.location;
             }
         };
