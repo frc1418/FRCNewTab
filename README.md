@@ -4,6 +4,7 @@ Custom new tab page for Chrome (other browsers coming soon) which displays infor
 ![Screenshot](screenshot.png)
 
 ## Installation
+Chrome Web Store install coming soon.
 To install from source:  
 1. Clone or download files.  
 2. Open Chrome Extensions page and activate Developer Mode.  

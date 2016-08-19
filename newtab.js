@@ -25,16 +25,17 @@ try {
 			team = JSON.parse(req.responseText);
 			// Set team name on page
 			el.name.innerHTML = (team.website && team.website !== 'Coming Soon') ? '<a href="' + team.website + '">' + team.nickname + '</a>' : team.nickname;
-			el.location.innerHTML = team.location
+			el.location.innerHTML = team.location;
 		}
 	};
 } catch (e) {}
 
 // Source it to a random photo in the bg folder.
 var src = 'bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
+
 // Make a new request to get list of team media from TBA
 var mediaReq = new XMLHttpRequest();
-
+// Set function to be executed when the data is ready
 mediaReq.onreadystatechange = function() {
 	if (mediaReq.readyState == 4 && mediaReq.status == 200) {
 		// Parse data for processing
@@ -67,15 +68,15 @@ mediaReq.onreadystatechange = function() {
 				}
 			}
 		}
-        console.log(media);
+        // Log URL of background image
         console.log(src);
+        // Put the image into the background (see below).
         renderImage();
 	}
 };
 
 // Get data
 mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
-// This is required for some reason
 mediaReq.send();
 
 function renderImage() {
@@ -97,4 +98,3 @@ function renderImage() {
 }
 
 // TODO: This process could probably be way more efficient. Find a way to improve.
-// TODO: Get rid of all the errors that come from this.

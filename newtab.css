@@ -52,8 +52,9 @@ h2 {
     font-weight: 300
 }
 h3 {
-    font-size: 25px;
-    font-weight: 200
+    font-size: 30px;
+    font-weight: 300;
+    margin-top: 10px;
 }
 #background {
     position: absolute;
