@@ -2,7 +2,7 @@
 var el = {
     number: document.getElementById('number'),
     name: document.getElementById('name'),
-    document.getElementById('background'),
+    bg: document.getElementById('background'),
     location: document.getElementById('location')
 };
 
