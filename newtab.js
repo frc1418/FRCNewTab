@@ -1,9 +1,9 @@
 // Aliases for major page elements
 var el = {
-	number: document.getElementById('number'),
-	name: document.getElementById('name'),
-	bg: document.getElementById('background'),
-	location: document.getElementById('location')
+    number: document.getElementById('number'),
+    name: document.getElementById('name'),
+    document.getElementById('background'),
+    location: document.getElementById('location')
 };
 
 var isClockMode;
