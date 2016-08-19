@@ -89,7 +89,7 @@ function renderImage() {
     	// Check if the image is smaller than the window.
     	if (img.naturalWidth >= window.innerWidth) {
     		// If it is, blur the background image.
-    		el.bg.style['-webkit-filter'] = 'contrast(0.7)';
+    		el.bg.style['-webkit-filter'] = 'none';
     	}
     };
 

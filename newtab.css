@@ -65,5 +65,5 @@ h3 {
     background-size: cover;
     background-position: center;
     z-index: -1;
-    -webkit-filter: blur(10px);
+    -webkit-filter: blur(5px);
 }
