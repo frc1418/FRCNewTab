@@ -3,22 +3,26 @@
 
 <head>
     <link rel="stylesheet" href="newtab.css">
+    <link rel="stylesheet" href="options.css">
 </head>
 
 <body>
-    <h2>FRC New Tab Extension Settings</h2>
-    <h3>Clock Mode</h3>
-    <p>
-        Clock mode disables random number selection and instead uses the time
-        to determine the team number shown.
-    </p>
-    <label>
-        <input type="checkbox" id="clock">
-        Enable clock mode 
-    </label>
+    <h2 id='title'>FRC New Tab Extension Settings</h2>
+    <div id='settings-content'>
+    <h3 class='subtitle'>Clock Mode</h3>
+        <p class='description'>
+            Clock mode disables random number selection and instead uses the time
+            to determine the team number shown.
+        </p>
+        <label>
+            <input type="checkbox" id="clock">
+            Enable clock mode
+        </label>
 
-    <div id="status"></div>
-    <button id="save">Save</button>
+        <br><br>
+        <div class='button-holder'><button id="save">Save</button></div>
+        <div id="status"></div>
+    </div>
 
     <script src="options.js"></script>
     <!-- TODO: Color scheme manager -->
