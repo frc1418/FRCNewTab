@@ -86,7 +86,7 @@ function getTBAData() {
     } catch (e) {}
 
     // Source it to a random photo in the bg folder.
-    var src = 'bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
+    var src = '../bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
 
     // Make a new request to get list of team media from TBA
     var mediaReq = new XMLHttpRequest();
