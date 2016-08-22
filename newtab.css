@@ -67,3 +67,26 @@ h3 {
     z-index: -1;
     -webkit-filter: blur(5px);
 }
+
+#options {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 5px;
+}
+
+#options > img {
+    height: 32px;
+    width: 32px;
+
+    -webkit-transition: 1s;
+    transition: 1s;
+}
+
+#options > img:hover {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+    -webkit-transition: 1s;
+    transition: 1s;
+}
