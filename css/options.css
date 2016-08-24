@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Roboto Light'), local('Roboto-Light'), url(../font/Roboto-Light.woff2) format('woff2');
+    unicode-range: U+0000-00FF;
+}
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Roboto Thin'), local('Roboto-Thin'), url(../font/Roboto-Thin.woff2) format('woff2');
+    unicode-range: U+0000-00FF;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+h1 {
+    font-size: 35px;
+}
+.options {
+    padding: 20px 0;
+}
