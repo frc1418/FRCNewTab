@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "FRC New Tab",
-    "short_name": "FRCNewTab",
+	"short_name": "FRCNewTab",
 	"description": "New Tab page to display information about a random FRC team.",
 	"icons": {
 		"128": "assets/img/128.png"
