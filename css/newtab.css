@@ -65,27 +65,23 @@ h3 {
     background-position: center;
     z-index: -1;
     -webkit-filter: blur(5px);
+    filter: blur(5px);
 }
-
 #options {
     position: fixed;
-    top: 0;
+    bottom: 0;
     right: 0;
     padding: 5px;
 }
-
 #options > img {
     height: 32px;
     width: 32px;
-
-    -webkit-transition: 1s;
-    transition: 1s;
+    -webkit-transition: .2s;
+    transition: .2s;
 }
-
 #options > img:hover {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-    -webkit-transition: 1s;
-    transition: 1s;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-transition: .2s;
+    transition: .2s;
 }
