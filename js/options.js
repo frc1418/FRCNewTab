@@ -1,18 +1,26 @@
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
-	// Use default value clockMode = 'military' and isClockMode = false.
+	// Use default values if there's nothing in storage.
 	chrome.storage.sync.get({
-		isClockMode: false
+		clockMode: false,
+        showLocation: true,
+        showOptions: true
 	}, function(items) {
-		document.getElementById('clock').checked = items.isClockMode;
+		document.getElementById('clock').checked = items.clockMode;
+        document.getElementById('location').checked = items.showLocation;
+        document.getElementById('options').checked = items.showOptions;
 	});
 }
 document.addEventListener('DOMContentLoaded', restore_options);
 
 onchange = function() {
-    var isClockMode = document.getElementById('clock').checked;
+    var clockMode = document.getElementById('clock').checked;
+    var showLocation = document.getElementById('location').checked;
+    var showOptions = document.getElementById('options').checked;
     chrome.storage.sync.set({
-        isClockMode: isClockMode
+        clockMode: clockMode,
+        showLocation: showLocation,
+        showOptions: showOptions
     });
 };

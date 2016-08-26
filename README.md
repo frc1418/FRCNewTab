@@ -1,7 +1,7 @@
 # FRCNewTab
 Custom new tab page for Chrome (other browsers coming soon) which displays information about a random FIRST Robotics Competition team along with a picture of their most recent robot.
 
-![Screenshot](assets/img/screenshot.png)
+![Screenshot](res/img/screenshot.png)
 
 ## Installation
 Chrome Web Store install coming soon.

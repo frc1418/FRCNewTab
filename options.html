@@ -7,11 +7,30 @@
 </head>
 
 <body>
-    <h1 id="title">FRC New Tab Options</h1>
-    <div class="options">
-        <label>
-            <input type="checkbox" id="clock"> Enable clock mode
-        </label>
+    <h1>FRC New Tab Options</h1>
+    <div class="switch">
+        <p>Random team</p>
+        <input type="checkbox" id="clock">
+        <label for="clock"></label>
+        <p>Clock mode</p>
+    </div>
+    <section>
+        <div class="checkbox">
+            <input type="checkbox" id="location">
+            <label for="location"></label>
+            <p>Show team location</p>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" id="options">
+            <label for="options"></label>
+            <p>Show options button</p>
+        </div>
+    </section>
+    <div class="select">
+        <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
     </div>
 
     <p>View source on <a href="https://github.com/ErikBoesen/FRCNewTab">GitHub</a></p>

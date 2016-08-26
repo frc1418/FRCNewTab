@@ -2,14 +2,14 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
-    src: local('Roboto Light'), local('Roboto-Light'), url(../assets/font/Roboto-Light.woff2) format('woff2');
+    src: local('Roboto Light'), local('Roboto-Light'), url(../res/font/Roboto-Light.woff2) format('woff2');
     unicode-range: U+0000-00FF;
 }
 @font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 100;
-    src: local('Roboto Thin'), local('Roboto-Thin'), url(../assets/font/Roboto-Thin.woff2) format('woff2');
+    src: local('Roboto Thin'), local('Roboto-Thin'), url(../res/font/Roboto-Thin.woff2) format('woff2');
     unicode-range: U+0000-00FF;
 }
 * {
@@ -73,13 +73,13 @@ h3 {
     right: 0;
     padding: 5px;
 }
-#options > img {
+#options img {
     height: 32px;
     width: 32px;
     -webkit-transition: .2s;
     transition: .2s;
 }
-#options > img:hover {
+#options img:hover {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     -webkit-transition: .2s;
