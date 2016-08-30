@@ -33,7 +33,7 @@ body {
     background-size: cover;
 }
 #content {
-    padding: 30px;
+    padding: 10px 30px 10px;
     background: rgba(0, 0, 0, .8);
     text-align: center;
 }
@@ -45,15 +45,21 @@ a:hover {
 h1 {
     font-size: 150px;
     font-weight: 100;
+    margin: 0;
+    line-height: 1;
 }
 h2 {
     font-size: 50px;
-    font-weight: 300
+    font-weight: 300;
 }
 h3 {
     font-size: 30px;
     font-weight: 300;
-    margin-top: 10px;
+    margin-bottom: 20px;
+}
+h2:empty,
+h3:empty {
+    display: none;
 }
 #background {
     position: absolute;

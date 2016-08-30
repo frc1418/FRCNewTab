@@ -1,3 +1,12 @@
+if (localStorage.length != 5) {
+    localStorage.clear();
+	localStorage.clockMode = false;
+	localStorage.teams = undefined;
+	localStorage.name = true;
+	localStorage.location = true;
+    localStorage.optionsButton = true;
+}
+
 // Aliases for major page elements
 var el = {
 	number: document.getElementById('number'),
@@ -10,7 +19,7 @@ var isMilitary = true;
 var teamNum;
 var teamNumText;
 
-if (localStorage.teams !== '[]' && localStorage.teams !== undefined) {
+if (localStorage.teams !== '[]' && localStorage.teams !== undefined && localStorage.teams !== '') {
 	teams = JSON.parse(localStorage.teams);
 }
 
@@ -57,14 +66,25 @@ try {
 			// Parse the data into JSON to get it ready to be used
 			team = JSON.parse(req.responseText);
 
-			// Set team name on page
-			if (team.website && team.website !== 'Coming Soon') {
-				el.name.innerHTML = '<a href="' + team.website + '">' + team.nickname + '</a>';
+			// If name showing is enabled,
+			if (JSON.parse(localStorage.name)) {
+                // If team has a website that isn't "Coming Soon"
+				if (team.website && team.website !== 'Coming Soon') {
+                    // Make the name a link to the website
+					el.name.innerHTML = '<a href="' + team.website + '">' + team.nickname + '</a>';
+				} else {
+                    // Insert name without a link
+					el.name.innerHTML = team.nickname;
+				}
 			} else {
-				el.name.innerHTML = team.nickname;
-			}
+                el.name.parentNode.removeChild(el.name);
+            }
 
-			el.location.innerHTML = team.location;
+			if (JSON.parse(localStorage.location)) {
+                el.location.innerHTML = team.location;
+            } else {
+                el.location.parentNode.removeChild(el.location);
+            }
 		}
 	};
 } catch (e) {}
