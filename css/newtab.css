@@ -24,13 +24,13 @@ html, body {
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-size: cover;
     color: white;
     -webkit-font-smoothing: antialiased;
     background-size: cover;
+    line-height: 1;
 }
 #content {
     padding: 10px 30px 10px;
@@ -46,11 +46,11 @@ h1 {
     font-size: 150px;
     font-weight: 100;
     margin: 0;
-    line-height: 1;
 }
 h2 {
     font-size: 50px;
     font-weight: 300;
+    margin-bottom: 10px;
 }
 h3 {
     font-size: 30px;
@@ -78,6 +78,7 @@ h3:empty {
     bottom: 0;
     right: 0;
     padding: 5px;
+    display: none;
 }
 #options img {
     height: 32px;

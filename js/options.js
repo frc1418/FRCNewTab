@@ -8,8 +8,11 @@ if (localStorage.length != 5) {
 }
 
 document.getElementById('clock').checked = JSON.parse(localStorage.clockMode);
-
-if (localStorage.teams !== undefined && localStorage.teams !== 'undefined') document.getElementById('teams').value = JSON.parse(localStorage.teams);
+if (localStorage.teams !== undefined && localStorage.teams !== 'undefined' && localStorage.teams !== '') {
+    document.getElementById('teams').value = JSON.parse(localStorage.teams);
+} else {
+    document.getElementById('teams').value = '';
+}
 document.getElementById('name').checked = JSON.parse(localStorage.name);
 document.getElementById('location').checked = JSON.parse(localStorage.location);
 document.getElementById('options-button').checked = JSON.parse(localStorage.optionsButton);
