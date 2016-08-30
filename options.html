@@ -14,30 +14,15 @@
         <label for="clock"></label>
         <p>Clock mode</p>
     </div>
-    <section>
-        <div class="checkbox">
-            <input type="checkbox" id="location">
-            <label for="location"></label>
-            <p>Show team location</p>
-        </div>
-        <div class="checkbox">
-            <input type="checkbox" id="options">
-            <label for="options"></label>
-            <p>Show options button</p>
-        </div>
-    </section>
-    <div class="select">
-        <select id="theme">
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-        </select>
-    </div>
+    <p>Custom team list:</p>
+    <p>(leave empty to choose a completely random team)</p>
+    <textarea cols="50" rows="5" id="teams" placeholder="Team list to choose from. Separate numbers with commas, surround with [ ], for example: [330,254,1418,236]"></textarea>
 
     <p>View source on <a href="https://github.com/ErikBoesen/FRCNewTab">GitHub</a></p>
 
-    <!-- TODO: Color scheme manager -->
-    <!-- TODO: District mode -->
-    <!-- TODO: Hide/show various team data points -->
+    <!-- TODO: Theme/color scheme manager -->
+    <!-- TODO: Hide/show various team data points (location, name, etc.). -->
+    <!-- TODO: Hide/show options button in bottom right corner. -->
     <p>Some default photos taken from the <a href="https://www.flickr.com/photos/121879765@N06/">Georgia FIRST Flickr page</a>. Used with permission.</p>
     <script src="js/options.js"></script>
 </body>
