@@ -1,5 +1,6 @@
 // If something's wrong with the options (generally, if they aren't set yet),
 // clear all options and reset to defaults.
+// TODO: This is duplicated in options.js. Combine these somehow.
 if (localStorage.length != 5) {
 	localStorage.clear();
 	localStorage.clockMode = false;
@@ -9,7 +10,7 @@ if (localStorage.length != 5) {
 	localStorage.optionsButton = true;
 }
 
-// Aliases for major page elements
+// Alias major page elements so we don't have to keep getting them by ID
 var el = {
 	number: document.getElementById('number'),
 	name: document.getElementById('name'),
@@ -18,44 +19,38 @@ var el = {
     options: document.getElementById('options')
 };
 
-var isMilitary = true;
-var teamNum;
-var teamNumText;
 
-if (localStorage.teams !== '[]' && localStorage.teams !== undefined && localStorage.teams !== '') {
+// If custom teams value is truthy (not undefined or '', for example) and not an empty array,
+// replace the data.js teams array with the custom one from localStorage.
+if (localStorage.teams !== '[]' && localStorage.teams) {
 	teams = JSON.parse(localStorage.teams);
 }
 
+// Initialize int-type team number variable
+var teamNum;
+// and string-type team number var (used more for clock mode)
+var teamNumStr;
 
-// Pick rand team from team array in data.js
+// If clock mode is turned on, get the team that corresponds to the current time.
 if (JSON.parse(localStorage.clockMode)) {
-	// Get date
+	// Get date, current hour, and current minute.
 	var d = new Date();
 	var hours = d.getHours();
-	if (!isMilitary) {
-		hours %= 12;
-	}
+    var minutes = d.getMinutes();
 	// Construct team number
-	hours *= 100;
-	timeTeam = hours + d.getMinutes();
-	teamNum = timeTeam;
-
-	// Create text version
-	teamNumText = teamNum.toString();
-
-	// Insert colon
-	var teamNumArray = teamNumText.split('');
-	teamNumArray.splice((teamNumText.length - 2), 0, ':');
-	teamNumText = teamNumArray.join('');
-	console.log(teamNumText);
+	teamNum = hours * 100 + minutes;
+    teamNumStr = hours + ':' + minutes;
 } else {
+    // If clock mode is off, choose a random team.
 	teamNum = teams[parseInt(Math.random() * teams.length)];
-	teamNumText = teamNum.toString();
+	teamNumStr = teamNum.toString();
 }
 
 // Put team number on page
-el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNumText + '</a>';
+el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNumStr + '</a>';
 
+// If the option to show the options button is on, show it.
+// (If it's not, it will remain hidden as normal.)
 if (JSON.parse(localStorage.optionsButton)) el.options.style.display = 'block';
 
 try {
@@ -65,10 +60,10 @@ try {
 	req.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
 	// Send empty data for conclusion
 	req.send();
-	// When the data is ready
+	// When the data is ready, figure out where an image is and get ready to set it as the background.
 	req.onreadystatechange = function() {
 		if (req.readyState == 4 && req.status == 200) {
-			// Parse the data into JSON to get it ready to be used
+			// Parse the newly-fetched team data into JSON to get it ready to be used
 			team = JSON.parse(req.responseText);
 
 			// If name showing is enabled,
@@ -82,25 +77,30 @@ try {
 					el.name.innerHTML = team.nickname;
 				}
 			} else {
+                // Otherwise, delete the name element from the DOM.
 				el.name.parentNode.removeChild(el.name);
 			}
 
+            // If location showing is on,
 			if (JSON.parse(localStorage.location)) {
+                // Then set the location onscreen.
 				el.location.innerHTML = team.location;
 			} else {
+                // Otherwise, remove the location element from the DOM.
 				el.location.parentNode.removeChild(el.location);
 			}
 		}
 	};
 } catch (e) {}
 
-// Define source variable
+// Initialize background image source as a randomly-chosen fallback image.
 var src = '../bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
 
 try {
 	// Make a new request to get list of team media from TBA
 	var mediaReq = new XMLHttpRequest();
 
+    // When the data is ready,
 	mediaReq.onreadystatechange = function() {
 		if (mediaReq.readyState == 4 && mediaReq.status == 200) {
 			// Parse data for processing
@@ -132,16 +132,15 @@ try {
 					}
 				}
 			}
-			// Log URL of background image
-        	// Get data
 			// Put the image into the background (see below).
 			renderImage();
 		}
 	};
-
+    // Actually open the request.
     mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
     mediaReq.send();
 } catch (e) {
+    // If there's a problem, just render the fallback image we created a link to earlier.
 	renderImage();
 }
 
@@ -165,4 +164,4 @@ function renderImage() {
 }
 
 
-// TODO: This process could probably be way more efficient. Find a way to improve.
+// TODO: Make this whole process more efficient.
