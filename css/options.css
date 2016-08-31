@@ -37,7 +37,7 @@ body > p {
     margin: 30px 0 10px;
 }
 .switch p {
-    margin: 0 6px;
+    margin-right: 6px;
 }
 .switch p:last-child {
     margin-left: 52px;
@@ -121,4 +121,7 @@ section {
 }
 textarea {
     font-size: inherit;
+    padding: 5px;
+    outline: none;
+    border: solid 1px #ddd;
 }
