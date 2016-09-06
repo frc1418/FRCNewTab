@@ -19,11 +19,12 @@ var o = {
     optionsButton: document.getElementById('options-button')
 };
 
+// Get option values from localStorage and set all the inputs to those values.
 o.clock.checked = JSON.parse(localStorage.clockMode);
+// If the custom team list is valid, put it into the textbox.
+// If the list doesn't exist or isn't valid, the textbox will be left empty.
 if (localStorage.teams !== undefined && localStorage.teams !== 'undefined' && localStorage.teams !== '') {
     o.teams.value = JSON.parse(localStorage.teams);
-} else {
-    o.teams.value = '';
 }
 o.name.checked = JSON.parse(localStorage.name);
 o.location.checked = JSON.parse(localStorage.location);
@@ -31,7 +32,7 @@ o.optionsButton.checked = JSON.parse(localStorage.optionsButton);
 
 console.log('Loaded options!');
 
-
+// Function to update localStorage with new values from inputs.
 function updateOptions() {
 	localStorage.clockMode = o.clock.checked;
 	localStorage.teams = o.teams.value;
@@ -42,6 +43,7 @@ function updateOptions() {
 	console.log('Options updated!');
 }
 
+// Update localStorage, using the above function, when options are changed.
 // TODO: Should call the function directly. Very strange that this doesn't work.
 oninput = function() { updateOptions(); };
 onchange = function() { updateOptions(); };
