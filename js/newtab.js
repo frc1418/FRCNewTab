@@ -20,9 +20,9 @@ var el = {
 };
 
 
-// If custom teams value is truthy (not undefined or '', for example) and not an empty array,
+// If custom teams value is truthy, valid, and not an empty array,
 // replace the data.js teams array with the custom one from localStorage.
-if (localStorage.teams !== '[]' && localStorage.teams) {
+if (localStorage.teams !== '[]' && localStorage.teams !== '' && localStorage.teams !== 'undefined') {
 	teams = JSON.parse(localStorage.teams);
 }
 
