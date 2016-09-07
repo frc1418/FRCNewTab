@@ -3,10 +3,10 @@
 // TODO: This is duplicated in newtab.js. Combine these somehow.
 if (localStorage.length != 5) {
     localStorage.clear();
-	localStorage.clockMode = false;
-	localStorage.teams = undefined;
-	localStorage.name = true;
-	localStorage.location = true;
+    localStorage.clockMode = false;
+    localStorage.teams = undefined;
+    localStorage.name = true;
+    localStorage.location = true;
     localStorage.optionsButton = true;
 }
 
@@ -34,13 +34,13 @@ console.log('Loaded options!');
 
 // Function to update localStorage with new values from inputs.
 function updateOptions() {
-	localStorage.clockMode = o.clock.checked;
-	localStorage.teams = o.teams.value;
+    localStorage.clockMode = o.clock.checked;
+    localStorage.teams = o.teams.value;
     localStorage.name = o.name.checked;
     localStorage.location = o.location.checked;
     localStorage.optionsButton = o.optionsButton.checked;
 
-	console.log('Options updated!');
+    console.log('Options updated!');
 }
 
 // Update localStorage, using the above function, when options are changed.
