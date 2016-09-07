@@ -36,10 +36,11 @@ if (JSON.parse(localStorage.clockMode)) {
 	// Get date, current hour, and current minute.
 	var d = new Date();
 	var hours = d.getHours();
-    var minutes = d.getMinutes();
+    var minutes = 7;
 	// Construct team number
 	teamNum = hours * 100 + minutes;
-    teamNumStr = hours + ':' + minutes;
+    if (minutes < 10) {var spacer = "0"} else {var spacer = ""} 
+    teamNumStr = hours + ':' + spacer + minutes;
 } else {
     // If clock mode is off, choose a random team.
 	teamNum = teams[parseInt(Math.random() * teams.length)];
