@@ -1,10 +1,12 @@
 # FRCNewTab
 Custom new tab page for Chrome (other browsers coming soon) which displays information about a random FIRST Robotics Competition team along with a picture of their most recent robot.
 
-![Screenshot](res/img/screenshot.png)
+![Screenshot](screenshots/1.png)
+![Screenshot](screenshots/2.png)
+![Screenshot](screenshots/3.png)
 
 ## Installation
-Chrome Web Store install coming soon.
+The packaged extension can be downloaded [here](https://chrome.google.com/webstore/detail/agmoglelphhinnadfmbfodhkdagibkop/).
 To install from source:  
 1. Clone or download files.  
 2. Open Chrome Extensions page and activate Developer Mode.  
