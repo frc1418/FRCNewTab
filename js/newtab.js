@@ -23,7 +23,11 @@ var el = {
 // If custom teams value is truthy, valid, and not an empty array,
 // replace the data.js teams array with the custom one from localStorage.
 if (localStorage.teams !== '[]' && localStorage.teams !== '' && localStorage.teams !== 'undefined') {
-    teams = JSON.parse(localStorage.teams);
+    // TEMPORARY: If the 'teams' data has brackets around it, remove the brackets.
+    if (localStorage.teams[0] === '[' || localStorage.teams[localStorage.teams.length - 1] === ']') {
+        localStorage.teams = localStorage.teams.substring(1, localStorage.teams.length - 1);
+    }
+	teams = JSON.parse('[' + localStorage.teams + ']');
 }
 
 // Initialize int-type team number variable
