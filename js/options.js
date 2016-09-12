@@ -23,9 +23,7 @@ var o = {
 o.clock.checked = JSON.parse(localStorage.clockMode);
 // TEMPORARY: If the 'teams' data has brackets around it, remove the brackets.
 if (localStorage.teams[0] === '[' || localStorage.teams[localStorage.teams.length - 1] === ']') {
-    console.log(localStorage.teams);
     localStorage.teams = localStorage.teams.substring(1, localStorage.teams.length - 1);
-    console.log(localStorage.teams);
 }
 // If the custom team list is valid, put it into the textbox.
 // If the list doesn't exist or isn't valid, the textbox will be left empty.
