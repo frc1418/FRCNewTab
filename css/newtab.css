@@ -37,6 +37,11 @@ body {
     background: rgba(0, 0, 0, .8);
     text-align: center;
 }
+#dismiss {
+    float: right;
+    position: relative;
+    display: none;
+}
 a,
 a:hover {
     color: white;
