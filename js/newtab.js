@@ -151,6 +151,19 @@ try {
 	renderImage();
 }
 
+var content = document.getElementById('content');
+var dismiss = document.getElementById('dismiss');
+// Hide the content div if hide is toggled.
+content.addEventListener('mouseover', function() {
+	dismiss.style.display = "block";
+});
+content.addEventListener('mouseout', function() {
+	dismiss.style.display = "none";
+});
+dismiss.addEventListener('click', function() {
+	content.style.display = content.style.display == "none" ? "block" : "none";
+});
+
 function renderImage() {
 	console.log('Rendering', src);
 	// Create image. This will be used to check if the image is smaller than the window.
