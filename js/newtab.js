@@ -96,6 +96,10 @@ try {
 				// Otherwise, remove the location element from the DOM.
 				el.location.parentNode.removeChild(el.location);
 			}
+
+			// Display the team name and number in titlebar.
+			el.number.insertAdjacentHTML('beforeend', '<title>FRC Team ' + teamNum + ' - ' + team.nickname + '</title>');
+
 		}
 	};
 } catch (e) {}

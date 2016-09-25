@@ -6,7 +6,7 @@
 	"icons": {
 		"128": "res/img/128.png"
 	},
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"chrome_url_overrides": {
 		"newtab": "newtab.html"
 	},
