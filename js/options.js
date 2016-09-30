@@ -1,14 +1,13 @@
 // If something's wrong with the options (generally, if they aren't set yet),
 // clear all options and reset to defaults.
 // TODO: This is duplicated in newtab.js. Combine these somehow.
-if (localStorage.length != 5) {
-    localStorage.clear();
-    localStorage.clockMode = false;
-    localStorage.teams = undefined;
-    localStorage.name = true;
-    localStorage.location = true;
-    localStorage.optionsButton = true;
-}
+// TODO: Updating isn't exactly graceful. Find a better way to do this.
+if (!localStorage.clockMode) localStorage.clockMode = false;
+if (!localStorage.teams) localStorage.teams = undefined;
+if (!localStorage.name) localStorage.name = true;
+if (!localStorage.location) localStorage.location = true;
+if (!localStorage.vetting) localStorage.vetting = true;
+if (!localStorage.optionsButton) localStorage.optionsButton = true;
 
 // Alias all the data inputs so we don't have to keep getting them by ID later on
 var o = {
@@ -16,6 +15,7 @@ var o = {
     teams: document.getElementById('teams'),
     name: document.getElementById('name'),
     location: document.getElementById('location'),
+    vetting: document.getElementById('vetting'),
     optionsButton: document.getElementById('options-button')
 };
 
@@ -32,6 +32,7 @@ if (localStorage.teams !== undefined && localStorage.teams !== 'undefined' && lo
 }
 o.name.checked = JSON.parse(localStorage.name);
 o.location.checked = JSON.parse(localStorage.location);
+o.vetting.checked = JSON.parse(localStorage.vetting);
 o.optionsButton.checked = JSON.parse(localStorage.optionsButton);
 
 console.log('Loaded options!');
@@ -42,6 +43,7 @@ function updateOptions() {
     localStorage.teams = o.teams.value;
     localStorage.name = o.name.checked;
     localStorage.location = o.location.checked;
+    localStorage.vetting = o.vetting.checked;
     localStorage.optionsButton = o.optionsButton.checked;
 
     console.log('Options updated!');

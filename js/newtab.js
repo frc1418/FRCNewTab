@@ -1,14 +1,13 @@
 // If something's wrong with the options (generally, if they aren't set yet),
 // clear all options and reset to defaults.
 // TODO: This is duplicated in options.js. Combine these somehow.
-if (localStorage.length != 5) {
-	localStorage.clear();
-	localStorage.clockMode = false;
-	localStorage.teams = undefined;
-	localStorage.name = true;
-	localStorage.location = true;
-	localStorage.optionsButton = true;
-}
+// TODO: Updating isn't exactly graceful. Find a better way to do this.
+if (!localStorage.clockMode) localStorage.clockMode = false;
+if (!localStorage.teams) localStorage.teams = undefined;
+if (!localStorage.name) localStorage.name = true;
+if (!localStorage.location) localStorage.location = true;
+if (!localStorage.vetting) localStorage.vetting = true;
+if (!localStorage.optionsButton) localStorage.optionsButton = true;
 
 // Alias major page elements so we don't have to keep getting them by ID
 var el = {
@@ -121,16 +120,22 @@ try {
 			} catch (e) {}
 			console.log(media.length);
 			if (media.length > 0) {
-				var target;
-				// Go through every piece of media
+				var images = [];
+				// Go through every piece of media and add high quality images to an array
 				for (i = 0; i < media.length; i++) {
 					// Find media that's an image
-					if (media[i].type === 'imgur' || media[i].type === 'cdphotothread') {
-						// Set target to that image and break loop.
-						target = i;
-						break;
+
+					if ((media[i].type === 'imgur' || media[i].type === 'cdphotothread')) {
+						// If vetting is on and the image is high quality add it to the array
+						if (JSON.parse(localStorage.vetting)) {
+							if (media[i].preferred) images.push(i);
+						} else {
+							images.push(i); // Otherwise add every image
+						}
 					}
 				}
+				// Grab a random image if vetting is enabled; otherwise grab the first image
+				var target = JSON.parse(localStorage.vetting) ? images[Math.floor(Math.random()*images.length)] : 0;
 				// Check where the media is sourced from. Use this to build a link to the image.
 				if (target !== null) {
 					switch (media[target].type) {
