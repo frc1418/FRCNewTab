@@ -121,16 +121,17 @@ try {
 			} catch (e) {}
 			console.log(media.length);
 			if (media.length > 0) {
-				var target;
-				// Go through every piece of media
+				var images = [];
+				// Go through every piece of media and add high quality images to an array
 				for (i = 0; i < media.length; i++) {
 					// Find media that's an image
-					if (media[i].type === 'imgur' || media[i].type === 'cdphotothread') {
+					if ((media[i].type === 'imgur' || media[i].type === 'cdphotothread') && media[i].preferred === true) {
 						// Set target to that image and break loop.
-						target = i;
-						break;
+						images.push(i);
 					}
 				}
+				// Grab a random image
+				var target = images[Math.floor(Math.random()*images.length)];
 				// Check where the media is sourced from. Use this to build a link to the image.
 				if (target !== null) {
 					switch (media[target].type) {
