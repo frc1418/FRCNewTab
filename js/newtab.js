@@ -2,14 +2,12 @@
 // clear all options and reset to defaults.
 // TODO: This is duplicated in options.js. Combine these somehow.
 // TODO: Updating isn't exactly graceful. Find a better way to do this.
-if (localStorage.length != 6) {
-    if (!localStorage.clockMode) localStorage.clockMode = false;
-    if (!localStorage.teams) localStorage.teams = undefined;
-    if (!localStorage.name) localStorage.name = true;
-    if (!localStorage.location) localStorage.location = true;
-    if (!localStorage.vetting) localStorage.vetting = true;
-    if (!localStorage.optionsButton) localStorage.optionsButton = true;
-}
+if (!localStorage.clockMode) localStorage.clockMode = false;
+if (!localStorage.teams) localStorage.teams = undefined;
+if (!localStorage.name) localStorage.name = true;
+if (!localStorage.location) localStorage.location = true;
+if (!localStorage.vetting) localStorage.vetting = true;
+if (!localStorage.optionsButton) localStorage.optionsButton = true;
 
 // Alias major page elements so we don't have to keep getting them by ID
 var el = {
