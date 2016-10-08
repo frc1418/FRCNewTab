@@ -96,9 +96,10 @@ try {
 				el.location.parentNode.removeChild(el.location);
 			}
 
-			// Display the team name and number in titlebar.
-			el.number.insertAdjacentHTML('beforeend', '<title>FRC Team ' + teamNum + ' - ' + team.nickname + '</title>');
-
+			if (JSON.parse(localStorage.dynamicTitle)) {
+                // Display the team name and number in titlebar.
+    			el.number.insertAdjacentHTML('beforeend', '<title>' + teamNum + ' - ' + team.nickname + '</title>');
+            }
 		}
 	};
 } catch (e) {}
@@ -159,19 +160,6 @@ try {
 	// If there's a problem, just render the fallback image we created a link to earlier.
 	renderImage();
 }
-
-var content = document.getElementById('content');
-var dismiss = document.getElementById('dismiss');
-// Hide the content div if hide is toggled.
-content.addEventListener('mouseover', function() {
-	dismiss.style.display = "block";
-});
-content.addEventListener('mouseout', function() {
-	dismiss.style.display = "none";
-});
-dismiss.addEventListener('click', function() {
-	content.style.display = content.style.display == "none" ? "block" : "none";
-});
 
 function renderImage() {
 	console.log('Rendering', src);

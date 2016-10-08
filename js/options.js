@@ -8,6 +8,7 @@ if (!localStorage.name) localStorage.name = true;
 if (!localStorage.location) localStorage.location = true;
 if (!localStorage.vetting) localStorage.vetting = true;
 if (!localStorage.optionsButton) localStorage.optionsButton = true;
+if (!localStorage.dynamicTitle) localStorage.dynamicTitle = false;
 
 // Alias all the data inputs so we don't have to keep getting them by ID later on
 var o = {
@@ -16,7 +17,8 @@ var o = {
     name: document.getElementById('name'),
     location: document.getElementById('location'),
     vetting: document.getElementById('vetting'),
-    optionsButton: document.getElementById('options-button')
+    optionsButton: document.getElementById('options-button'),
+    dynamicTitle: document.getElementById('dynamic-title')
 };
 
 // Get option values from localStorage and set all the inputs to those values.
@@ -34,6 +36,7 @@ o.name.checked = JSON.parse(localStorage.name);
 o.location.checked = JSON.parse(localStorage.location);
 o.vetting.checked = JSON.parse(localStorage.vetting);
 o.optionsButton.checked = JSON.parse(localStorage.optionsButton);
+o.dynamicTitle.checked = JSON.parse(localStorage.dynamicTitle);
 
 console.log('Loaded options!');
 
@@ -45,6 +48,7 @@ function updateOptions() {
     localStorage.location = o.location.checked;
     localStorage.vetting = o.vetting.checked;
     localStorage.optionsButton = o.optionsButton.checked;
+    localStorage.dynamicTitle = o.dynamicTitle.checked;
 
     console.log('Options updated!');
 }
