@@ -52,9 +52,6 @@ if (JSON.parse(localStorage.clockMode)) {
 	teamNumStr = teamNum.toString();
 }
 
-// Put team number on page
-el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNumStr + '</a>';
-
 // If the option to show the options button is on, show it.
 // (If it's not, it will remain hidden as normal.)
 if (JSON.parse(localStorage.optionsButton)) el.options.style.display = 'block';
@@ -71,6 +68,9 @@ try {
 		if (req.readyState == 4 && req.status == 200) {
 			// Parse the newly-fetched team data into JSON to get it ready to be used
 			team = JSON.parse(req.responseText);
+
+			// Put team number on page if the team exists
+			el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNumStr + '</a>';
 
 			// If name showing is enabled,
 			if (JSON.parse(localStorage.name)) {
@@ -100,13 +100,15 @@ try {
                 // Display the team name and number in titlebar.
     			el.number.insertAdjacentHTML('beforeend', '<title>' + teamNum + ' - ' + team.nickname + '</title>');
             }
+		} else {
+			// If the team doesn't exist (for clock mode)
+			el.number.innerHTML = teamNumStr;
 		}
 	};
 } catch (e) {}
 
 // Initialize background image source as a randomly-chosen fallback image.
 var src = '../res/bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
-
 try {
 	// Make a new request to get list of team media from TBA
 	var mediaReq = new XMLHttpRequest();
@@ -150,6 +152,9 @@ try {
 				}
 			}
 			// Put the image into the background (see below).
+			renderImage();
+		} else {
+			// Media GET request failed - render a stock image
 			renderImage();
 		}
 	};
