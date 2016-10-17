@@ -100,7 +100,7 @@ try {
                 // Display the team name and number in titlebar.
     			el.number.insertAdjacentHTML('beforeend', '<title>' + teamNum + ' - ' + team.nickname + '</title>');
             }
-		} else {
+		} else if (req.readyState == 4 && req.status != 200) {
 			// If the team doesn't exist (for clock mode)
 			el.number.innerHTML = teamNumStr;
 		}
@@ -153,7 +153,7 @@ try {
 			}
 			// Put the image into the background (see below).
 			renderImage();
-		} else {
+		} else if (mediaReq.readyState == 4 && mediaReq.status != 200) {
 			// Media GET request failed - render a stock image
 			renderImage();
 		}
