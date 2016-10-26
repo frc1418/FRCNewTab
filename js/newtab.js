@@ -97,8 +97,8 @@ try {
 			}
 
 			if (JSON.parse(localStorage.dynamicTitle)) {
-                // Display the team name and number in titlebar.
-    			el.number.insertAdjacentHTML('beforeend', '<title>' + teamNum + ' - ' + team.nickname + '</title>');
+				// Display the team name and number in titlebar.
+				el.number.insertAdjacentHTML('beforeend', '<title>' + teamNum + ' - ' + team.nickname + '</title>');
             }
 		} else if (req.readyState == 4 && req.status != 200) {
 			// If the team doesn't exist (for clock mode)
