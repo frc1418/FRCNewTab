@@ -57,7 +57,7 @@ function loadTeam() {
 
 	var teamInfo = {
 		num: teamNum,
-		numstr: teamNumStr
+		numStr: teamNumStr
 	}
 
 	return teamInfo;
@@ -75,62 +75,65 @@ importData();
 // Get and load team number
 // Converts to clock mode if appropriate
 teamInfo = loadTeam();
-teamNum = teamInfo.num;
-teamNumStr = teamInfo.numstr;
 
 // Show options icon if appropriate
 showOptions();
 
-try {
-	// Create request to get data from TBA
-	var req = new XMLHttpRequest();
-	// Get data for team
-	req.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
-	// Send empty data for conclusion
-	req.send();
-	// When the data is ready, figure out where an image is and get ready to set it as the background.
-	req.onreadystatechange = function() {
-		if (req.readyState == 4 && req.status == 200) {
-			// Parse the newly-fetched team data into JSON to get it ready to be used
-			team = JSON.parse(req.responseText);
+// Get data from TBA
+getTBAData(teamInfo);
 
-			// Put team number on page if the team exists
-			el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamNum + '">' + teamNumStr + '</a>';
+function getTBAData(teamInfo) {
+    try {
+        // Create request to get data from TBA
+        var req = new XMLHttpRequest();
+        // Get data for team
+        req.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamInfo.num + '?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
+        // Send empty data for conclusion
+        req.send();
+        // When the data is ready, figure out where an image is and get ready to set it as the background.
+        req.onreadystatechange = function() {
+            if (req.readyState == 4 && req.status == 200) {
+                // Parse the newly-fetched team data into JSON to get it ready to be used
+                team = JSON.parse(req.responseText);
 
-			// If name showing is enabled,
-			if (JSON.parse(localStorage.name)) {
-				// If team has a website that isn't "Coming Soon"
-				if (team.website && team.website !== 'Coming Soon') {
-					// Make the name a link to the website
-					el.name.innerHTML = '<a href="' + team.website + '">' + team.nickname + '</a>';
-				} else {
-					// Insert name without a link
-					el.name.innerHTML = team.nickname;
-				}
-			} else {
-				// Otherwise, delete the name element from the DOM.
-				el.name.parentNode.removeChild(el.name);
-			}
+                // Put team number on page if the team exists
+                el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamInfo.num + '">' + teamInfo.numStr + '</a>';
 
-			// If location showing is on,
-			if (JSON.parse(localStorage.location)) {
-				// Then set the location onscreen.
-				el.location.innerHTML = team.location;
-			} else {
-				// Otherwise, remove the location element from the DOM.
-				el.location.parentNode.removeChild(el.location);
-			}
+                // If name showing is enabled,
+                if (JSON.parse(localStorage.name)) {
+                    // If team has a website that isn't "Coming Soon"
+                    if (team.website && team.website !== 'Coming Soon') {
+                        // Make the name a link to the website
+                        el.name.innerHTML = '<a href="' + team.website + '">' + team.nickname + '</a>';
+                    } else {
+                        // Insert name without a link
+                        el.name.innerHTML = team.nickname;
+                    }
+                } else {
+                    // Otherwise, delete the name element from the DOM.
+                    el.name.parentNode.removeChild(el.name);
+                }
 
-			if (JSON.parse(localStorage.dynamicTitle)) {
-				// Display the team name and number in titlebar.
-				el.number.insertAdjacentHTML('beforeend', '<title>' + teamNum + ' - ' + team.nickname + '</title>');
-			}
-		} else if (req.readyState == 4 && req.status != 200) {
-			// If the team doesn't exist (for clock mode)
-			el.number.innerHTML = teamNumStr;
-		}
-	};
-} catch (e) {}
+                // If location showing is on,
+                if (JSON.parse(localStorage.location)) {
+                    // Then set the location onscreen.
+                    el.location.innerHTML = team.location;
+                } else {
+                    // Otherwise, remove the location element from the DOM.
+                    el.location.parentNode.removeChild(el.location);
+                }
+
+                if (JSON.parse(localStorage.dynamicTitle)) {
+                    // Display the team name and number in titlebar.
+                    el.number.insertAdjacentHTML('beforeend', '<title>' + teamInfo.num + ' - ' + team.nickname + '</title>');
+                }
+            } else if (req.readyState == 4 && req.status != 200) {
+                // If the team doesn't exist (for clock mode)
+                el.number.innerHTML = teamInfo.numStr;
+            }
+        };
+    } catch (e) {}
+}
 
 // Initialize background image source as a randomly-chosen fallback image.
 var src = '../res/bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
