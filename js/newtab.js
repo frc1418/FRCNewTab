@@ -141,7 +141,7 @@ function renderImage(src) {
 	el.bg.style.backgroundImage = 'url(' + src + ')';
 }
 
-function getImage() {
+function getImage(info) {
 	try {
 		// Make a new request to get list of team media from TBA
 		var mediaReq = new XMLHttpRequest();
@@ -191,7 +191,7 @@ function getImage() {
 			}
 		};
 		// Actually open the request.
-		mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
+		mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + info.num + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
 		mediaReq.send();
 	} catch (e) {}
 	// If there's an error, we'll just render the random image from earlier
