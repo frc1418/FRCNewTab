@@ -185,7 +185,7 @@ function getImage(info) {
 					}
 				}
 				// Put the image into the background (see below).
-				renderImage();
+				renderImage(src);
 			} else if (mediaReq.readyState == 4 && mediaReq.status != 200) {
 				// Media GET request failed - render a stock image
 			}
@@ -195,6 +195,7 @@ function getImage(info) {
 		mediaReq.send();
 	} catch (e) {}
 	// If there's an error, we'll just render the random image from earlier
+    renderImage(src);
 
 	return src;
 }
@@ -216,9 +217,7 @@ getTBAData(teamInfo);
 var src = '../res/bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
 
 // Get an image source from TBA
-src = getImage();
-
-// Render image on html page
-renderImage(src);
+// Also renders image on page
+getImage(teamInfo);
 
 // TODO: Make this whole process more efficient.
