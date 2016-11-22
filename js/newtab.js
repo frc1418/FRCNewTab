@@ -122,6 +122,25 @@ function getTBAData(teamInfo) {
 	} catch (e) {}
 }
 
+function renderImage() {
+	console.log('Rendering', src);
+	// Create image. This will be used to check if the image is smaller than the window.
+	var img = new Image();
+	// Give it the proper source.
+	img.src = src;
+	// When the source is done loading,
+	img.onload = function() {
+		// Check if the image is smaller than the window.
+		if (img.naturalWidth >= window.innerWidth) {
+			// If it is, blur the background image.
+			el.bg.style['-webkit-filter'] = 'none';
+		}
+	};
+
+	// Set the src of the real background image.
+	el.bg.style.backgroundImage = 'url(' + src + ')';
+}
+
 // Import data.js
 importData();
 
@@ -193,25 +212,5 @@ try {
 	// If there's a problem, just render the fallback image we created a link to earlier.
 	renderImage();
 }
-
-function renderImage() {
-	console.log('Rendering', src);
-	// Create image. This will be used to check if the image is smaller than the window.
-	var img = new Image();
-	// Give it the proper source.
-	img.src = src;
-	// When the source is done loading,
-	img.onload = function() {
-		// Check if the image is smaller than the window.
-		if (img.naturalWidth >= window.innerWidth) {
-			// If it is, blur the background image.
-			el.bg.style['-webkit-filter'] = 'none';
-		}
-	};
-
-	// Set the src of the real background image.
-	el.bg.style.backgroundImage = 'url(' + src + ')';
-}
-
 
 // TODO: Make this whole process more efficient.
