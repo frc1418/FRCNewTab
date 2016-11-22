@@ -195,7 +195,7 @@ function getImage(info) {
 		mediaReq.send();
 	} catch (e) {}
 	// If there's an error, we'll just render the random image from earlier
-    renderImage(src);
+	renderImage(src);
 
 	return src;
 }
