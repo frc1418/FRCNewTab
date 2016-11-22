@@ -122,7 +122,7 @@ function getTBAData(teamInfo) {
 	} catch (e) {}
 }
 
-function renderImage() {
+function renderImage(src) {
 	console.log('Rendering', src);
 	// Create image. This will be used to check if the image is smaller than the window.
 	var img = new Image();
@@ -141,6 +141,64 @@ function renderImage() {
 	el.bg.style.backgroundImage = 'url(' + src + ')';
 }
 
+function getImage() {
+	try {
+		// Make a new request to get list of team media from TBA
+		var mediaReq = new XMLHttpRequest();
+
+		// When the data is ready,
+		mediaReq.onreadystatechange = function() {
+			if (mediaReq.readyState == 4 && mediaReq.status == 200) {
+				// Parse data for processing
+				var media = [];
+				try {
+					media = JSON.parse(mediaReq.responseText);
+				} catch (e) {}
+				console.log(media.length);
+				if (media.length > 0) {
+					var images = [];
+					// Go through every piece of media and add high quality images to an array
+					for (i = 0; i < media.length; i++) {
+						// Find media that's an image
+
+						if ((media[i].type === 'imgur' || media[i].type === 'cdphotothread')) {
+							// If vetting is on and the image is high quality add it to the array
+							if (JSON.parse(localStorage.vetting)) {
+								if (media[i].preferred) images.push(i);
+							} else {
+								images.push(i); // Otherwise add every image
+							}
+						}
+					}
+					// Grab a random image if vetting is enabled; otherwise grab the first image
+					var target = JSON.parse(localStorage.vetting) ? images[Math.floor(Math.random()*images.length)] : 0;
+					// Check where the media is sourced from. Use this to build a link to the image.
+					if (target !== null) {
+						switch (media[target].type) {
+							case 'imgur':
+								src = 'http://i.imgur.com/' + media[target].foreign_key + '.png';
+								break;
+							case 'cdphotothread':
+								src = 'https://www.chiefdelphi.com/media/img/' + media[target].details.image_partial;
+								break;
+						}
+					}
+				}
+				// Put the image into the background (see below).
+				renderImage();
+			} else if (mediaReq.readyState == 4 && mediaReq.status != 200) {
+				// Media GET request failed - render a stock image
+			}
+		};
+		// Actually open the request.
+		mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
+		mediaReq.send();
+	} catch (e) {}
+	// If there's an error, we'll just render the random image from earlier
+
+	return src;
+}
+
 // Import data.js
 importData();
 
@@ -156,61 +214,11 @@ getTBAData(teamInfo);
 
 // Initialize background image source as a randomly-chosen fallback image.
 var src = '../res/bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
-try {
-	// Make a new request to get list of team media from TBA
-	var mediaReq = new XMLHttpRequest();
 
-	// When the data is ready,
-	mediaReq.onreadystatechange = function() {
-		if (mediaReq.readyState == 4 && mediaReq.status == 200) {
-			// Parse data for processing
-			var media = [];
-			try {
-				media = JSON.parse(mediaReq.responseText);
-			} catch (e) {}
-			console.log(media.length);
-			if (media.length > 0) {
-				var images = [];
-				// Go through every piece of media and add high quality images to an array
-				for (i = 0; i < media.length; i++) {
-					// Find media that's an image
+// Get an image source from TBA
+src = getImage();
 
-					if ((media[i].type === 'imgur' || media[i].type === 'cdphotothread')) {
-						// If vetting is on and the image is high quality add it to the array
-						if (JSON.parse(localStorage.vetting)) {
-							if (media[i].preferred) images.push(i);
-						} else {
-							images.push(i); // Otherwise add every image
-						}
-					}
-				}
-				// Grab a random image if vetting is enabled; otherwise grab the first image
-				var target = JSON.parse(localStorage.vetting) ? images[Math.floor(Math.random()*images.length)] : 0;
-				// Check where the media is sourced from. Use this to build a link to the image.
-				if (target !== null) {
-					switch (media[target].type) {
-						case 'imgur':
-							src = 'http://i.imgur.com/' + media[target].foreign_key + '.png';
-							break;
-						case 'cdphotothread':
-							src = 'https://www.chiefdelphi.com/media/img/' + media[target].details.image_partial;
-							break;
-					}
-				}
-			}
-			// Put the image into the background (see below).
-			renderImage();
-		} else if (mediaReq.readyState == 4 && mediaReq.status != 200) {
-			// Media GET request failed - render a stock image
-			renderImage();
-		}
-	};
-	// Actually open the request.
-	mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamNum + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
-	mediaReq.send();
-} catch (e) {
-	// If there's a problem, just render the fallback image we created a link to earlier.
-	renderImage();
-}
+// Render image on html page
+renderImage(src);
 
 // TODO: Make this whole process more efficient.
