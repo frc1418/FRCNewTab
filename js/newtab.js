@@ -19,42 +19,67 @@ var el = {
 };
 
 
-// If custom teams value is truthy, valid, and not an empty array,
-// replace the data.js teams array with the custom one from localStorage.
-if (localStorage.teams !== '[]' && localStorage.teams !== '' && localStorage.teams !== 'undefined') {
-	// TEMPORARY: If the 'teams' data has brackets around it, remove the brackets.
-	if (localStorage.teams[0] === '[' || localStorage.teams[localStorage.teams.length - 1] === ']') {
-		localStorage.teams = localStorage.teams.substring(1, localStorage.teams.length - 1);
+function importData() {
+	// If custom teams value is truthy, valid, and not an empty array,
+	// replace the data.js teams array with the custom one from localStorage.
+	if (localStorage.teams !== '[]' && localStorage.teams !== '' && localStorage.teams !== 'undefined') {
+		// TEMPORARY: If the 'teams' data has brackets around it, remove the brackets.
+		if (localStorage.teams[0] === '[' || localStorage.teams[localStorage.teams.length - 1] === ']') {
+			localStorage.teams = localStorage.teams.substring(1, localStorage.teams.length - 1);
+		}
+		teams = JSON.parse('[' + localStorage.teams + ']');
 	}
-	teams = JSON.parse('[' + localStorage.teams + ']');
 }
 
-// Initialize int-type team number variable
-var teamNum;
-// and string-type team number var (used more for clock mode)
-var teamNumStr;
+function loadTeam() {
+	// Initialize int-type team number variable
+	var teamNum;
+	// and string-type team number var (used more for clock mode)
+	var teamNumStr;
 
-// If clock mode is turned on, get the team that corresponds to the current time.
-if (JSON.parse(localStorage.clockMode)) {
-	// Get date, current hour, and current minute.
-	var d = new Date();
-	var hours = d.getHours();
-	var minutes = d.getMinutes();
-	// Construct team number
-	teamNum = hours * 100 + minutes;
-	if (minutes < 10) {
-		minutes = '0' + minutes;
+	// If clock mode is turned on, get the team that corresponds to the current time.
+	if (JSON.parse(localStorage.clockMode)) {
+		// Get date, current hour, and current minute.
+		var d = new Date();
+		var hours = d.getHours();
+		var minutes = d.getMinutes();
+		// Construct team number
+		teamNum = hours * 100 + minutes;
+		if (minutes < 10) {
+			minutes = '0' + minutes;
+		}
+		teamNumStr = hours + ':' + minutes;
+	} else {
+		// If clock mode is off, choose a random team.
+		teamNum = teams[parseInt(Math.random() * teams.length)];
+		teamNumStr = teamNum.toString();
 	}
-	teamNumStr = hours + ':' + minutes;
-} else {
-	// If clock mode is off, choose a random team.
-	teamNum = teams[parseInt(Math.random() * teams.length)];
-	teamNumStr = teamNum.toString();
+
+	var teamInfo = {
+		num: teamNum,
+		numstr: teamNumStr
+	}
+
+	return teamInfo;
 }
 
-// If the option to show the options button is on, show it.
-// (If it's not, it will remain hidden as normal.)
-if (JSON.parse(localStorage.optionsButton)) el.options.style.display = 'block';
+function showOptions() {
+	// If the option to show the options button is on, show it.
+	// (If it's not, it will remain hidden as normal.)
+	if (JSON.parse(localStorage.optionsButton)) el.options.style.display = 'block';
+}
+
+// Import data.js
+importData();
+
+// Get and load team number
+// Converts to clock mode if appropriate
+teamInfo = loadTeam();
+teamNum = teamInfo.num;
+teamNumStr = teamInfo.numstr;
+
+// Show options icon if appropriate
+showOptions();
 
 try {
 	// Create request to get data from TBA
@@ -99,7 +124,7 @@ try {
 			if (JSON.parse(localStorage.dynamicTitle)) {
 				// Display the team name and number in titlebar.
 				el.number.insertAdjacentHTML('beforeend', '<title>' + teamNum + ' - ' + team.nickname + '</title>');
-            }
+			}
 		} else if (req.readyState == 4 && req.status != 200) {
 			// If the team doesn't exist (for clock mode)
 			el.number.innerHTML = teamNumStr;
