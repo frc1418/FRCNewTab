@@ -16,6 +16,9 @@ To install from source:
 
 This extension should work out of box. Settings can be configured in the Options link visible in the extensions menu.
 
+## Packaging
+The extension can easily be packaged into a zip for uploading to the Chrome Web Store by using GNU's `make` command. Simply navigate to the extension source directory and type `make`.
+
 --------------------------------------------------------------------------------
 
 This project is protected under the MIT license. More information in `LICENSE`.
