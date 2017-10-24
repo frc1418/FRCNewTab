@@ -74,7 +74,7 @@ function getTBAData(teamInfo) {
 		// Create request to get data from TBA
 		var req = new XMLHttpRequest();
 		// Get data for team
-		req.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + teamInfo.num + '?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
+		req.open('GET', 'https://www.thebluealliance.com/api/v3/team/frc' + teamInfo.num + '?X-TBA-Auth-Key=IJ7ECNmOibpHt04EdVs4xS7q5OQkIY5GE7USErbLXK3i4obXAilhJD8VP590o8Ur');
 		// Send empty data for conclusion
 		req.send();
 		// When the data is ready, figure out where an image is and get ready to set it as the background.
@@ -104,7 +104,7 @@ function getTBAData(teamInfo) {
 				// If location showing is on,
 				if (JSON.parse(localStorage.location)) {
 					// Then set the location onscreen.
-					el.location.innerHTML = team.location;
+					el.location.innerHTML = team.city + ', ' + team.country;
 				} else {
 					// Otherwise, remove the location element from the DOM.
 					el.location.parentNode.removeChild(el.location);
@@ -154,7 +154,6 @@ function getImage(info) {
 				try {
 					media = JSON.parse(mediaReq.responseText);
 				} catch (e) {}
-				console.log(media.length);
 				if (media.length > 0) {
 					var images = [];
 					// Go through every piece of media and add high quality images to an array
@@ -191,7 +190,7 @@ function getImage(info) {
 			}
 		};
 		// Actually open the request.
-		mediaReq.open('GET', 'https://www.thebluealliance.com/api/v2/team/frc' + info.num + '/media?X-TBA-App-Id=erikboesen:frcnewtab:v1.0');
+		mediaReq.open('GET', 'https://www.thebluealliance.com/api/v3/team/frc' + teamInfo.num + '/media/' + new Date().getFullYear() + '?X-TBA-Auth-Key=IJ7ECNmOibpHt04EdVs4xS7q5OQkIY5GE7USErbLXK3i4obXAilhJD8VP590o8Ur');
 		mediaReq.send();
 	} catch (e) {}
 	// If there's an error, we'll just render the random image from earlier
@@ -214,7 +213,7 @@ showOptions();
 getTBAData(teamInfo);
 
 // Initialize background image source as a randomly-chosen fallback image.
-var src = '../res/bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
+var src = '/res/bg/' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
 
 // Get an image source from TBA
 // Also renders image on page
