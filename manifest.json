@@ -6,10 +6,11 @@
 	"icons": {
 		"128": "res/img/128.png"
 	},
-	"version": "1.6.1",
+	"version": "1.6.2",
 	"chrome_url_overrides": {
 		"newtab": "newtab.html"
 	},
+	"strict_min_version": "54",
 	"options_page": "options.html",
 	"options_ui": {
 		"page": "options.html",
