@@ -36,6 +36,7 @@ body {
     padding: 10px 30px 10px;
     background: rgba(0, 0, 0, .8);
     text-align: center;
+    visibility: hidden;
 }
 #dismiss {
     float: right;

@@ -84,17 +84,28 @@ function getTBAData(teamInfo) {
 				team = JSON.parse(req.responseText);
 
 				// Put team number on page if the team exists
-				el.number.innerHTML = '<a href="https://www.thebluealliance.com/team/' + teamInfo.num + '">' + teamInfo.numStr + '</a>';
+				var a = document.createElement('a');
+				a.href = 'https://www.thebluealliance.com/team/' + teamInfo.num
+				a.appendChild(document.createTextNode(teamInfo.numStr));
+
+				el.number.appendChild(a);
+				el.number.parentNode.style.visibility = 'visible';
 
 				// If name showing is enabled,
 				if (JSON.parse(localStorage.name)) {
+					var a, text;
 					// If team has a website that isn't "Coming Soon"
 					if (team.website && team.website !== 'Coming Soon') {
 						// Make the name a link to the website
-						el.name.innerHTML = '<a href="' + team.website + '">' + team.nickname + '</a>';
+						a = document.createElement('a')
+						a.href = team.website
+						text = document.createTextNode(team.nickname);
+
+						el.name.appendChild(a);
 					} else {
 						// Insert name without a link
-						el.name.innerHTML = team.nickname;
+						text = document.createTextNode(team.nickname);
+						el.name.appendChild(text);
 					}
 				} else {
 					// Otherwise, delete the name element from the DOM.
@@ -104,7 +115,8 @@ function getTBAData(teamInfo) {
 				// If location showing is on,
 				if (JSON.parse(localStorage.location)) {
 					// Then set the location onscreen.
-					el.location.innerHTML = team.city + ', ' + team.country;
+					var loc = document.createTextNode(team.city + ', ' + team.country)
+					el.location.appendChild(loc);
 				} else {
 					// Otherwise, remove the location element from the DOM.
 					el.location.parentNode.removeChild(el.location);
@@ -112,11 +124,12 @@ function getTBAData(teamInfo) {
 
 				if (JSON.parse(localStorage.dynamicTitle)) {
 					// Display the team name and number in titlebar.
-					el.number.insertAdjacentHTML('beforeend', '<title>' + teamInfo.num + ' - ' + team.nickname + '</title>');
+					document.title = teamInfo.num + ' - ' + team.nickname
 				}
 			} else if (req.readyState == 4 && req.status != 200) {
 				// If the team doesn't exist (for clock mode)
-				el.number.innerHTML = teamInfo.numStr;
+				var num = document.createTextNode(teamInfo.numStr)
+				el.number.appendChild(num);
 			}
 		};
 	} catch (e) {}
