@@ -18,6 +18,10 @@ To install from source:
 
 This extension should work out of box. Settings can be configured in the Options link visible in the extensions menu.
 
+## FAQ
+### How do I add a photo for my team?
+FRCNewTab retrieves team photos from The Blue Alliance's API. If you would like to add a new photo for your team, go to its page on The Blue Alliance (such as https://thebluealliance.com/team/1418) and click "Add new media" near the bottom of the page. You can also visit this page directly to submit media: https://www.thebluealliance.com/suggest/team/media?team_key=frcNUMBER&year=YEAR
+
 ## Packaging
 The extension can easily be packaged into a zip for uploading to the Chrome Web Store by using GNU's `make` command. Simply navigate to the extension source directory and type `make`.
 
