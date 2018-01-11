@@ -159,6 +159,9 @@ function getImage(info) {
 		// Make a new request to get list of team media from TBA
 		var mediaReq = new XMLHttpRequest();
 
+		// Get month and year to determine what year the photo is from
+		var date = new Date();
+
 		// When the data is ready,
 		mediaReq.onreadystatechange = function() {
 			if (mediaReq.readyState == 4 && mediaReq.status == 200) {
@@ -203,7 +206,7 @@ function getImage(info) {
 			}
 		};
 		// Actually open the request.
-		mediaReq.open('GET', 'https://www.thebluealliance.com/api/v3/team/frc' + teamInfo.num + '/media/' + new Date().getFullYear() + '?X-TBA-Auth-Key=IJ7ECNmOibpHt04EdVs4xS7q5OQkIY5GE7USErbLXK3i4obXAilhJD8VP590o8Ur');
+		mediaReq.open('GET', 'https://www.thebluealliance.com/api/v3/team/frc' + teamInfo.num + '/media/' + (date.getFullYear() - (date.getMonth() >=4 ? 0 : 1)) + '?X-TBA-Auth-Key=IJ7ECNmOibpHt04EdVs4xS7q5OQkIY5GE7USErbLXK3i4obXAilhJD8VP590o8Ur');
 		mediaReq.send();
 	} catch (e) {}
 	// If there's an error, we'll just render the random image from earlier
