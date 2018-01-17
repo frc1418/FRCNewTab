@@ -9,6 +9,7 @@ Custom new tab page extension which displays information about a random FIRST Ro
 The packaged extension can be downloaded below:
 * [Chrome](https://chrome.google.com/webstore/detail/agmoglelphhinnadfmbfodhkdagibkop/)
 * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/frc-new-tab/)
+
 To install from source:  
 1. Clone or download files.  
 2. Open Chrome Extensions page and activate Developer Mode.  
