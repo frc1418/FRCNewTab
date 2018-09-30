@@ -189,7 +189,7 @@ function getImage(info) {
 					// Grab a random image if vetting is enabled; otherwise grab the first image
 					var target = JSON.parse(localStorage.vetting) ? images[Math.floor(Math.random()*images.length)] : 0;
 					// Check where the media is sourced from. Use this to build a link to the image.
-					if (target !== null) {
+					if (target && media[target]) {
 						switch (media[target].type) {
 							case 'imgur':
 								src = 'http://i.imgur.com/' + media[target].foreign_key + '.png';
