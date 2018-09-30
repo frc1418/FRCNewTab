@@ -1,15 +1,3 @@
-// If something's wrong with the options (generally, if they aren't set yet),
-// clear all options and reset to defaults.
-// TODO: This is duplicated in newtab.js. Combine these somehow.
-// TODO: Updating isn't exactly graceful. Find a better way to do this.
-if (!localStorage.clockMode) localStorage.clockMode = false;
-if (!localStorage.teams) localStorage.teams = undefined;
-if (!localStorage.name) localStorage.name = true;
-if (!localStorage.location) localStorage.location = true;
-if (!localStorage.vetting) localStorage.vetting = true;
-if (!localStorage.optionsButton) localStorage.optionsButton = true;
-if (!localStorage.dynamicTitle) localStorage.dynamicTitle = false;
-
 // Alias all the data inputs so we don't have to keep getting them by ID later on
 var o = {
     clock: document.getElementById('clock'),
