@@ -101,6 +101,7 @@ function getTBAData(teamInfo) {
 						a = document.createElement('a')
 						a.href = team.website
 						text = document.createTextNode(team.nickname);
+                        a.appendChild(text);
 
 						el.name.appendChild(a);
 					} else {
