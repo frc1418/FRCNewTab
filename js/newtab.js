@@ -8,6 +8,7 @@ if (!localStorage.name) localStorage.name = true;
 if (!localStorage.location) localStorage.location = true;
 if (!localStorage.vetting) localStorage.vetting = true;
 if (!localStorage.optionsButton) localStorage.optionsButton = true;
+if (!localStorage.dynamicTitle) localStorage.dynamicTitle = false;
 
 // Alias major page elements so we don't have to keep getting them by ID
 var el = {
