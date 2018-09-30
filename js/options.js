@@ -54,6 +54,5 @@ function updateOptions() {
 }
 
 // Update localStorage, using the above function, when options are changed.
-// TODO: Should call the function directly. Very strange that this doesn't work.
-o.teams.oninput = function() { updateOptions(); };
-onchange = function() { updateOptions(); };
+o.teams.oninput = updateOptions
+onchange = updateOptions
