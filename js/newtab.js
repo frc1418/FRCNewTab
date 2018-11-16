@@ -105,7 +105,11 @@ function getTBAData(teamInfo) {
 				// If location showing is on,
 				if (JSON.parse(localStorage.location)) {
 					// Then set the location onscreen.
-					var loc = document.createTextNode(team.city + ', ' + team.country)
+					if (team.state_prov) {
+						var loc = document.createTextNode(team.city + ', ' + team.state_prov + ', ' + team.country)
+					} else {
+						var loc = document.createTextNode(team.city + ', ' + team.country)
+					}
 					el.location.appendChild(loc);
 				} else {
 					// Otherwise, remove the location element from the DOM.
