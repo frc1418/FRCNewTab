@@ -40,8 +40,12 @@ function loadTeam() {
 		teamNumStr = hours + ':' + minutes;
 	} else {
 		// If clock mode is off, choose a random team.
-		teamNum = teams[parseInt(Math.random() * teams.length)];
-		teamNumStr = teamNum.toString();
+		teamNumStr = "";
+		while (!teamNumStr)
+		{
+			teamNum = teams[parseInt(Math.random() * teams.length)];
+			teamNumStr = teamNum.toString();
+		}
 	}
 
 	var teamInfo = {
